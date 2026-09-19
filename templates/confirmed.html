@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+</nav>
+
+<main class="order-page">
+    <h1>Order Confirmed! 🎉</h1>
+    <p>Thank you, <strong>{{ name }}</strong>!</p>
+    <p>Your order for <strong>{{ product }}</strong> has been received.</p>
+    <p>Price: <strong>₹{{ price }}</strong></p>
+    <p>Phone: {{ phone }}</p>
+    <p>Delivery Address: {{ address }}</p>
+
+    <br>
+    <a href="/">
+        <button>Continue Shopping</button>
+    </a>
+</main>
+
+</body>
+</html>

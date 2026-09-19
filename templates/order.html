@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
+    <main class="order-page">
+        <h1>Place Your Order 🛍️</h1>
+        <p>Product: <strong>{{ product }}</strong></p>
+        <p>Price: <strong>₹{{ price }}</strong></p>
+
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <textarea name="address" placeholder="Delivery Address" required></textarea>
+            <button type="submit">Place Order</button>
+        </form>
+    </main>
+</body>
+</html>

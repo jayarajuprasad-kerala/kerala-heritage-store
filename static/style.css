@@ -1,0 +1,286 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f8f3e7;
+    color: #2d2418;
+}
+
+nav {
+    background: #17452b;
+    padding: 16px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    color: #f5d77a;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #f5d77a;
+}
+
+.hero {
+    background:
+        linear-gradient(rgba(23, 69, 43, 0.88), rgba(23, 69, 43, 0.88)),
+        radial-gradient(circle, #d8b85c, #17452b);
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.tagline {
+    color: #f5d77a;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 46px;
+    margin: 20px 0 15px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+.hero-button {
+    display: inline-block;
+    background: #d4a72c;
+    color: #fff;
+    padding: 13px 25px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.heritage {
+    text-align: center;
+    padding: 55px 20px 20px;
+}
+
+.heritage h2,
+.why-us h2 {
+    color: #17452b;
+    font-size: 32px;
+}
+
+.heritage p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 40px 20px 70px;
+    flex-wrap: wrap;
+}
+
+.product {
+    background: white;
+    width: 280px;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    font-size: 80px;
+    background: #f5ead0;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.category {
+    color: #a47713;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.product h2 {
+    color: #17452b;
+    margin: 10px 0;
+}
+
+.product p {
+    color: #666;
+    line-height: 1.5;
+    min-height: 70px;
+}
+
+.product strong {
+    display: block;
+    color: #a47713;
+    font-size: 25px;
+    margin: 18px 0;
+}
+
+button {
+    background: #17452b;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #23643e;
+}
+
+.why-us {
+    text-align: center;
+    background: #eee4cf;
+    padding: 60px 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+}
+
+.features div {
+    background: white;
+    width: 240px;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.features span {
+    font-size: 40px;
+}
+
+.features h3 {
+    color: #17452b;
+}
+
+.features p {
+    color: #666;
+}
+
+footer {
+    background: #173b27;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+footer h2 {
+    color: #f5d77a;
+}
+
+.order-page {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.order-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 25px auto;
+}
+
+.order-page input,
+.order-page textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.order-page textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.order-page button {
+    background: #17452b;
+    color: white;
+}
+
+.order-page .product {
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .hero {
+        padding: 65px 18px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .product {
+        width: 100%;
+        max-width: 340px;
+    }
+}
