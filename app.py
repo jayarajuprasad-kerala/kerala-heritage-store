@@ -1,19 +1,19 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
-import sqlite3
+import psycopg2
 
 app = Flask(__name__)
 
 app.secret_key = "kerala-store-secret-key-change-later"
 
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
-DB = "orders.db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def init_db():
-    conn = sqlite3.connect(DB)
+    conn = psycopg2.connect(DATABASE_URL)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS orders (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             name TEXT NOT NULL,
             phone TEXT NOT NULL,
             address TEXT NOT NULL,
@@ -49,12 +49,12 @@ def order(product, price):
         if not name or not phone or not address:
             return "Please fill in all the fields.", 400
 
-        conn = sqlite3.connect(DB)
+        conn = psycopg2.connect(DATABASE_URL)
         cursor = conn.cursor()
 
         cursor.execute("""
             INSERT INTO orders (name, phone, address, product, price)
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s, %s)
         """, (name, phone, address, product, price))
 
         order_id = cursor.lastrowid
@@ -96,8 +96,8 @@ def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
-    conn = sqlite3.connect(DB)
-    conn.row_factory = sqlite3.Row
+    conn = psycopg2.connect(DATABASE_URL)
+    
 
     orders = conn.execute("""
         SELECT * FROM orders
