@@ -9,6 +9,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+
 def init_db():
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
@@ -42,17 +43,21 @@ def init_db():
 
 init_db()
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/about")
 def about():
     return render_template("about.html")
 
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
 
 @app.route("/order/<product>/<price>", methods=["GET", "POST"])
 def order(product, price):
@@ -88,6 +93,7 @@ def order(product, price):
 
     return render_template("order.html", product=product, price=price)
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -101,10 +107,12 @@ def login():
 
     return render_template("login.html")
 
+
 @app.route("/logout")
 def logout():
     session.pop("admin_logged_in", None)
     return redirect(url_for("login"))
+
 
 @app.route("/admin")
 def admin():
@@ -118,11 +126,41 @@ def admin():
         SELECT * FROM orders
         ORDER BY id DESC
     """)
+
     orders = cursor.fetchall()
 
     conn.close()
 
     return render_template("admin.html", orders=orders)
+
+
+@app.route("/admin/products/add", methods=["POST"])
+def add_product():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    name = request.form.get("name", "").strip()
+    description = request.form.get("description", "").strip()
+    price = request.form.get("price", "").strip()
+    category = request.form.get("category", "").strip()
+    image = request.form.get("image", "").strip()
+
+    if not name or not description or not price or not category:
+        return "Please fill in all required fields.", 400
+
+    conn = psycopg2.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO products (name, description, price, category, image)
+        VALUES (%s, %s, %s, %s, %s)
+    """, (name, description, price, category, image))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("admin"))
+
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000)
