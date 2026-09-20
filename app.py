@@ -4,7 +4,7 @@ import psycopg2
 
 app = Flask(__name__)
 
-app.secret_key = "kerala-store-secret-key-change-later"
+app.secret_key = os.environ.get("SECRET_KEY")
 
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
 DATABASE_URL = os.environ.get("DATABASE_URL")
