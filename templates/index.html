@@ -42,38 +42,43 @@
 
 <section class="products" id="products">
 
-    <div class="product">
-        <div class="product-image">🥻</div>
-        <span class="category">KERALA TRADITION</span>
-        <h2>Kasavu Saree</h2>
-        <p>Elegant traditional Kerala saree with classic golden Kasavu border.</p>
-        <strong>₹1,499</strong>
-        <a href="/order/Kasavu-Saree/1499">
-            <button>Order Now</button>
-        </a>
-    </div>
+    {% if products %}
 
-    <div class="product">
-        <div class="product-image">👕</div>
-        <span class="category">TRADITIONAL WEAR</span>
-        <h2>Kerala Mundu</h2>
-        <p>Classic white Kerala mundu suitable for traditional occasions.</p>
-        <strong>₹699</strong>
-        <a href="/order/Kerala-Mundu/699">
-            <button>Order Now</button>
-        </a>
-    </div>
+        {% for product in products %}
 
-    <div class="product">
-        <div class="product-image">🪔</div>
-        <span class="category">HANDCRAFTED</span>
-        <h2>Brass Lamp</h2>
-        <p>Beautiful traditional brass lamp inspired by Kerala craftsmanship.</p>
-        <strong>₹899</strong>
-        <a href="/order/Brass-Lamp/899">
-            <button>Order Now</button>
-        </a>
-    </div>
+            <div class="product">
+
+                <div class="product-image">
+                    {{ product[5] or "🌴" }}
+                </div>
+
+                <span class="category">
+                    {{ product[4] }}
+                </span>
+
+                <h2>{{ product[1] }}</h2>
+
+                <p>
+                    {{ product[2] }}
+                </p>
+
+                <strong>
+                    ₹{{ product[3] }}
+                </strong>
+
+                <a href="/order/{{ product[1]|replace(' ', '-') }}/{{ product[3] }}">
+                    <button>Order Now</button>
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No products available yet.</p>
+
+    {% endif %}
 
 </section>
 
@@ -81,6 +86,7 @@
     <h2>Why Choose Kerala Heritage?</h2>
 
     <div class="features">
+
         <div>
             <span>🌿</span>
             <h3>Traditional</h3>
@@ -98,6 +104,7 @@
             <h3>Made With Care</h3>
             <p>Bringing Kerala's heritage to your home.</p>
         </div>
+
     </div>
 </section>
 
