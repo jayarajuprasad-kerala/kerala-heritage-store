@@ -37,8 +37,40 @@ def init_db():
         )
     """)
 
+    cur.execute("SELECT COUNT(*) FROM products")
+    product_count = cur.fetchone()[0]
+
+    if product_count == 0:
+        cur.execute("""
+            INSERT INTO products
+            (name, description, price, category, image)
+            VALUES
+            (%s, %s, %s, %s, %s),
+            (%s, %s, %s, %s, %s),
+            (%s, %s, %s, %s, %s)
+        """, (
+            "Kasavu Saree",
+            "Elegant traditional Kerala saree with classic golden Kasavu border.",
+            "1499",
+            "KERALA TRADITION",
+            "🥻",
+
+            "Kerala Mundu",
+            "Classic white Kerala mundu suitable for traditional occasions.",
+            "699",
+            "TRADITIONAL WEAR",
+            "👕",
+
+            "Brass Lamp",
+            "Beautiful traditional brass lamp inspired by Kerala craftsmanship.",
+            "899",
+            "HANDCRAFTED",
+            "🪔"
+        ))
+
     conn.commit()
     conn.close()
+
 
 
 init_db()
