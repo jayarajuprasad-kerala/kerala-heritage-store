@@ -11,7 +11,8 @@ DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def init_db():
     conn = psycopg2.connect(DATABASE_URL)
-    conn.execute("""
+    cur = conn.cursor()
+    cur.execute("""
         CREATE TABLE IF NOT EXISTS orders (
             id SERIAL PRIMARY KEY,
             name TEXT NOT NULL,
@@ -95,16 +96,17 @@ def logout():
 def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
+conn = psycopg2.connect(DATABASE_URL)
+cursor = conn.cursor()
 
-    conn = psycopg2.connect(DATABASE_URL)
+cursor.execute("""
+    SELECT * FROM orders
+    ORDER BY id DESC
+""")
+orders = cursor.fetchall()
+
+conn.close()
     
-
-    orders = conn.execute("""
-        SELECT * FROM orders
-        ORDER BY id DESC
-    """).fetchall()
-
-    conn.close()
 
     return render_template("admin.html", orders=orders)
 
