@@ -46,7 +46,19 @@ init_db()
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    conn = psycopg2.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM products
+        ORDER BY id DESC
+    """)
+
+    products = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("index.html", products=products)
 
 
 @app.route("/about")
