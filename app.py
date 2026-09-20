@@ -53,6 +53,21 @@ def init_db():
     "Kasavu Saree"
 ))
         cur.execute("""
+        INSERT INTO products
+        (name, description, price, category, image)
+        SELECT %s, %s, %s, %s, %s
+        WHERE NOT EXISTS (
+            SELECT 1 FROM products WHERE name = %s
+        )
+    """, (
+        "Brass Lamp",
+        "Beautiful traditional brass lamp inspired by Kerala craftsmanship.",
+        "899",
+        "HANDCRAFTED",
+        "🪔",
+        "Brass Lamp"
+    ))
+        cur.execute("""
             INSERT INTO products
             (name, description, price, category, image)
             VALUES
@@ -61,6 +76,21 @@ def init_db():
             (%s, %s, %s, %s, %s)
         """, (
             "Kasavu Saree",
+                cur.execute("""
+        INSERT INTO products
+        (name, description, price, category, image)
+        SELECT %s, %s, %s, %s, %s
+        WHERE NOT EXISTS (
+            SELECT 1 FROM products WHERE name = %s
+        )
+    """, (
+        "Kerala Mundu",
+        "Classic white Kerala mundu suitable for traditional occasions.",
+        "699",
+        "TRADITIONAL WEAR",
+        "👕",
+        "Kerala Mundu"
+    ))
             "Elegant traditional Kerala saree with classic golden Kasavu border.",
             "1499",
             "KERALA TRADITION",
