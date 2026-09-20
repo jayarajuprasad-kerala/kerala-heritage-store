@@ -38,21 +38,6 @@ def init_db():
     """)
 
     cur.execute("""
-    INSERT INTO products
-    (name, description, price, category, image)
-    SELECT %s, %s, %s, %s, %s
-    WHERE NOT EXISTS (
-        SELECT 1 FROM products WHERE name = %s
-    )
-""", (
-    "Kasavu Saree",
-    "Elegant traditional Kerala saree with classic golden Kasavu border.",
-    "1499",
-    "KERALA TRADITION",
-    "🥻",
-    "Kasavu Saree"
-))
-        cur.execute("""
         INSERT INTO products
         (name, description, price, category, image)
         SELECT %s, %s, %s, %s, %s
@@ -60,23 +45,15 @@ def init_db():
             SELECT 1 FROM products WHERE name = %s
         )
     """, (
-        "Brass Lamp",
-        "Beautiful traditional brass lamp inspired by Kerala craftsmanship.",
-        "899",
-        "HANDCRAFTED",
-        "🪔",
-        "Brass Lamp"
+        "Kasavu Saree",
+        "Elegant traditional Kerala saree with classic golden Kasavu border.",
+        "1499",
+        "KERALA TRADITION",
+        "🥻",
+        "Kasavu Saree"
     ))
-        cur.execute("""
-            INSERT INTO products
-            (name, description, price, category, image)
-            VALUES
-            (%s, %s, %s, %s, %s),
-            (%s, %s, %s, %s, %s),
-            (%s, %s, %s, %s, %s)
-        """, (
-            "Kasavu Saree",
-                cur.execute("""
+
+    cur.execute("""
         INSERT INTO products
         (name, description, price, category, image)
         SELECT %s, %s, %s, %s, %s
@@ -91,23 +68,22 @@ def init_db():
         "👕",
         "Kerala Mundu"
     ))
-            "Elegant traditional Kerala saree with classic golden Kasavu border.",
-            "1499",
-            "KERALA TRADITION",
-            "🥻",
 
-            "Kerala Mundu",
-            "Classic white Kerala mundu suitable for traditional occasions.",
-            "699",
-            "TRADITIONAL WEAR",
-            "👕",
-
-            "Brass Lamp",
-            "Beautiful traditional brass lamp inspired by Kerala craftsmanship.",
-            "899",
-            "HANDCRAFTED",
-            "🪔"
-        ))
+    cur.execute("""
+        INSERT INTO products
+        (name, description, price, category, image)
+        SELECT %s, %s, %s, %s, %s
+        WHERE NOT EXISTS (
+            SELECT 1 FROM products WHERE name = %s
+        )
+    """, (
+        "Brass Lamp",
+        "Beautiful traditional brass lamp inspired by Kerala craftsmanship.",
+        "899",
+        "HANDCRAFTED",
+        "🪔",
+        "Brass Lamp"
+    ))
 
     conn.commit()
     conn.close()
