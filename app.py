@@ -37,10 +37,21 @@ def init_db():
         )
     """)
 
-    cur.execute("SELECT COUNT(*) FROM products")
-    product_count = cur.fetchone()[0]
-
-    if product_count == 0:
+    cur.execute("""
+    INSERT INTO products
+    (name, description, price, category, image)
+    SELECT %s, %s, %s, %s, %s
+    WHERE NOT EXISTS (
+        SELECT 1 FROM products WHERE name = %s
+    )
+""", (
+    "Kasavu Saree",
+    "Elegant traditional Kerala saree with classic golden Kasavu border.",
+    "1499",
+    "KERALA TRADITION",
+    "🥻",
+    "Kasavu Saree"
+))
         cur.execute("""
             INSERT INTO products
             (name, description, price, category, image)
