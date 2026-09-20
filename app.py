@@ -96,17 +96,17 @@ def logout():
 def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
-conn = psycopg2.connect(DATABASE_URL)
-cursor = conn.cursor()
 
-cursor.execute("""
-    SELECT * FROM orders
-    ORDER BY id DESC
-""")
-orders = cursor.fetchall()
+    conn = psycopg2.connect(DATABASE_URL)
+    cursor = conn.cursor()
 
-conn.close()
-    
+    cursor.execute("""
+        SELECT * FROM orders
+        ORDER BY id DESC
+    """)
+    orders = cursor.fetchall()
+
+    conn.close()
 
     return render_template("admin.html", orders=orders)
 
